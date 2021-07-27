@@ -10,24 +10,24 @@ services:
     ports:
       - 443:443
     depends_on:
-      - backend
-      - frontend
+      - dspback
+      - dspfront
 
-  frontend:
-    image: frontend
-    container_name: frontend
+  dspfront:
+    image: dspfront
+    container_name: dspfront
     build:
       context: ./frontend
       dockerfile: Dockerfile
     depends_on:
-      - backend
+      - dspback
     ports:
       - 5001:5001
     restart: on-failure
 
-  backend:
-    image: backend
-    container_name: backend
+  dspback:
+    image: dspback
+    container_name: dspback
     volumes:
       - ./backend:/backend
     build:

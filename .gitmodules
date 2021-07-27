@@ -1,0 +1,6 @@
+[submodule "dspback"]
+	path = dspback
+	url = git@github.com:cznethub/dspback.git
+[submodule "dspfront"]
+	path = dspfront
+	url = git@github.com:cznethub/dspfront.git
