@@ -17,7 +17,7 @@ services:
     image: dspfront
     container_name: dspfront
     build:
-      context: ./frontend
+      context: ./dspfront
       dockerfile: Dockerfile
     depends_on:
       - dspback
@@ -29,9 +29,9 @@ services:
     image: dspback
     container_name: dspback
     volumes:
-      - ./backend:/backend
+      - ./dspback:/dspback
     build:
-      context: ./backend
+      context: ./dspback
       dockerfile: Dockerfile
     depends_on:
       - database
