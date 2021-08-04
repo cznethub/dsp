@@ -10,8 +10,8 @@ services:
     ports:
       - 443:443
     depends_on:
-      - dspback
       - dspfront
+      - dspback
 
   dspfront:
     image: dspfront
@@ -24,6 +24,8 @@ services:
     ports:
       - 5001:5001
     restart: on-failure
+    volumes:
+      - ./dspfront:/dspfront
 
   dspback:
     image: dspback
