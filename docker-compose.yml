@@ -26,6 +26,7 @@ services:
     restart: on-failure
     volumes:
       - ./dspfront:/dspfront
+      - /dspfront/node_modules
 
   dspback:
     image: dspback
