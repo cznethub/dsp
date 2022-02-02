@@ -13,6 +13,7 @@ services:
     depends_on:
       - dspfront
       - dspback
+    restart: unless-stopped
 
   dspfront:
     image: dspfront
@@ -24,7 +25,7 @@ services:
       - dspback
     ports:
       - 5001:5001
-    restart: on-failure
+    restart: unless-stopped
 
   dspback:
     image: dspback
@@ -38,18 +39,17 @@ services:
       - database
     ports:
       - 5002:5002
-    restart: on-failure
+    restart: unless-stopped
 
   database:
     image: postgres:13.1
     container_name: database
     ports:
       - 5432:5432
-
     environment:
       POSTGRES_USER: "${DATABASE_USERNAME}"
       POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
       POSTGRES_DB: "${DATABASE_NAME}"
-
     volumes:
       - /var/local/cznethub/dsp/postgresql/data:/var/lib/postgresql/data
+    restart: unless-stopped
