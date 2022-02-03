@@ -4,7 +4,7 @@ services:
 
   nginx:
     image: nginx:1.21.6
-    container_name: dsp_nginx
+    container_name: nginx
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - /opt/certs:/etc/ssl
@@ -41,7 +41,7 @@ services:
 
   database:
     image: postgres:14.1
-    container_name: dsp_database
+    container_name: database
     ports:
       - 5432:5432
     environment:
@@ -49,8 +49,8 @@ services:
       POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
       POSTGRES_DB: "${DATABASE_NAME}"
     volumes:
-      - dsp_pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     restart: unless-stopped
 
 volumes:
-    dsp_pgdata:
+    pgdata:
