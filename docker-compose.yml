@@ -30,8 +30,6 @@ services:
   dspback:
     image: dspback
     container_name: dspback
-    volumes:
-      - ./dspback:/dspback
     build:
       context: ./dspback
       dockerfile: Dockerfile
