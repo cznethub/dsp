@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+
+  dspfront:
+    image: dspfront
+    container_name: dspfront
+    build:
+      context: ./dspfront
+      dockerfile: Dockerfile
+    depends_on:
+      - dspback
+    ports:
+      - 5001:5001
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.17.10
+    container_name: dsp_nginx
+    volumes:
+      - ./nginx/nginx-full-dev.conf:/etc/nginx/nginx.conf
+      - ./nginx/config:/etc/ssl
+    ports:
+      - 443:443
+    depends_on:
+      - dspback
+
+  dspback:
+    image: dspback
+    container_name: dspback
+    volumes:
+      - ./dspback:/dspback
+    build:
+      context: ./dspback
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+    ports:
+      - 5002:5002
+    restart: on-failure
+
+  database:
+    image: postgres:13.1
+    container_name: database
+    ports:
+      - 5432:5432
+
+    environment:
+      POSTGRES_USER: "username"
+      POSTGRES_PASSWORD: "password"
+      POSTGRES_DB: "default_database"
+
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
