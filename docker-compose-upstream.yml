@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+
+  dspfront:
+    image: dspfront
+    container_name: dspfront
+    build:
+      context: ./dspfront
+      dockerfile: Dockerfile
+    depends_on:
+      - dspback
+    ports:
+      - 5001:5001
+    restart: unless-stopped
+
+  dspback:
+    image: dspback
+    container_name: dspback
+    build:
+      context: ./dspback
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+    ports:
+      - 5002:5002
+    restart: unless-stopped
+
+  database:
+    image: postgres:14.1
+    container_name: database
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: "${DATABASE_USERNAME}"
+      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
+      POSTGRES_DB: "${DATABASE_NAME}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+    pgdata:
