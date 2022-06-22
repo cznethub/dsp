@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
 
@@ -20,24 +20,6 @@ services:
     build:
       context: ./dspback
       dockerfile: Dockerfile
-    depends_on:
-      - database
     ports:
       - 5002:5002
     restart: unless-stopped
-
-  database:
-    image: postgres:14.1
-    container_name: database
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_USER: "${DATABASE_USERNAME}"
-      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
-      POSTGRES_DB: "${DATABASE_NAME}"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    restart: unless-stopped
-
-volumes:
-    pgdata:
