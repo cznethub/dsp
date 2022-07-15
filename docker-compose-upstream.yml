@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+
+  dspfront:
+    image: dspfront
+    container_name: dspfront
+    build:
+      context: ./dspfront
+      dockerfile: Dockerfile
+    depends_on:
+      - dspback
+    ports:
+      - 5001:5001
+    restart: unless-stopped
+
+  dspback:
+    image: dspback
+    container_name: dspback
+    build:
+      context: ./dspback
+      dockerfile: Dockerfile
+    ports:
+      - 5002:5002
+    restart: unless-stopped
