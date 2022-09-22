@@ -44,18 +44,16 @@ jobs:
           ./hydrotest dsp DspEarthchemTestSuite --headless --browser chrome --base ${{ github.event.inputs.target }} 2>&1 | tee -a output/earthchem-browser-test.txt
 
       - name: Archive test results
-        working-directory: QA-AutomationEngine
         uses: actions/upload-artifact@v3
         with:
           name: DSP-ARTIFACTS
-          path: output
+          path: QA-AutomationEngine/output
 
       - name: Archive debug
-        working-directory: QA-AutomationEngine
         uses: actions/upload-artifact@v3
         with:
           name: DSP-DEBUG
-          path: debug
+          path: QA-AutomationEngine/debug
 
       - name: Check whether passing
         working-directory: QA-AutomationEngine/output
