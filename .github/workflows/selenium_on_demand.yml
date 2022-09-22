@@ -5,7 +5,7 @@ on:
     inputs:
       target:
         default: 'https://dsp-test.criticalzone.org/'
-        description: 'Alternative to Refs above, URL to target tests (ex: https://dsp-beta.criticalzone.org/). If all inputs blank, will run against dsp-test'
+        description: 'URL of dsp deployment to test'
 
 jobs:
   build-test:
@@ -32,10 +32,11 @@ jobs:
         run: sudo apt-get install -y chromium-browser
 
       - name: Create Output Dir
+        working-directory: QA-AutomationEngine
         run: mkdir output
 
       - name: Run Tests against target = ${{ github.event.inputs.dsp-back-ref }}
-        if: github.event.inputs.target != ''
+        working-directory: QA-AutomationEngine
         run: |
           ./hydrotest dsp DspHydroshareTestSuite --headless --browser chrome --base ${{ github.event.inputs.target }} 2>&1 | tee -a output/hydroshare-browser-test.txt
           ./hydrotest dsp DspExternalTestSuite --headless --browser chrome --base ${{ github.event.inputs.target }} 2>&1 | tee -a output/external-browser-test.txt
@@ -43,18 +44,20 @@ jobs:
           ./hydrotest dsp DspEarthchemTestSuite --headless --browser chrome --base ${{ github.event.inputs.target }} 2>&1 | tee -a output/earthchem-browser-test.txt
 
       - name: Archive test results
+        working-directory: QA-AutomationEngine
         uses: actions/upload-artifact@v3
         with:
           name: DSP-ARTIFACTS
           path: output
 
       - name: Archive debug
+        working-directory: QA-AutomationEngine
         uses: actions/upload-artifact@v3
         with:
           name: DSP-DEBUG
           path: debug
 
       - name: Check whether passing
-        working-directory: output
+        working-directory: QA-AutomationEngine/output
         run: |
           if grep -rl -e "FAILED (" -e "ERROR:" . >/dev/null; then grep -rh -e "FAIL:" -e "ERROR:" . && exit 1; else grep -rh "OK (" .; fi
