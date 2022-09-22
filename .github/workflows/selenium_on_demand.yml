@@ -25,6 +25,7 @@ jobs:
           python-version: 3.9
 
       - name: Install dependencies
+        working-directory: QA-AutomationEngine
         run: pip3 install -r requirements.txt
 
       - name: Prepare Selenium
