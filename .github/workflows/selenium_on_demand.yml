@@ -35,7 +35,7 @@ jobs:
         working-directory: QA-AutomationEngine
         run: mkdir output
 
-      - name: Run Tests against target = ${{ github.event.inputs.dsp-back-ref }}
+      - name: Run Tests against target = ${{ github.event.inputs.target }}
         working-directory: QA-AutomationEngine
         run: |
           ./hydrotest dsp DspHydroshareTestSuite --headless --browser chrome --base ${{ github.event.inputs.target }} 2>&1 | tee -a output/hydroshare-browser-test.txt
