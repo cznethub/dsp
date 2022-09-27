@@ -36,6 +36,7 @@ jobs:
         run: mkdir output
 
       - name: Retrieve base64 from secrets and decode to .env file
+        working-directory: QA-AutomationEngine
         env:
           DSP_QA_ENGINE_ENV_BASE64: ${{ secrets.DSP_QA_ENGINE_ENV_BASE64 }}
         run: |
