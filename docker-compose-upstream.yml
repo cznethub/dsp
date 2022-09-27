@@ -6,7 +6,7 @@ services:
     image: dspfront
     container_name: dspfront
     volumes:
-      - ./.env:/dspfront/.env
+      - ./.env:/dspfront/.env.production.local
     build:
       context: ./dspfront
       dockerfile: Dockerfile
