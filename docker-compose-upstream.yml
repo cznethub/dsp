@@ -5,6 +5,8 @@ services:
   dspfront:
     image: dspfront
     container_name: dspfront
+    volumes:
+      - ./.env:/dspfront/.env
     build:
       context: ./dspfront
       dockerfile: Dockerfile
@@ -17,6 +19,8 @@ services:
   dspback:
     image: dspback
     container_name: dspback
+    volumes:
+      - .env:/dspback/.env
     build:
       context: ./dspback
       dockerfile: Dockerfile
