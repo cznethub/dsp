@@ -1,4 +1,4 @@
-name: Run DSP Tests
+name: Run Singel DSP Test or Suite
 
 on:
   workflow_dispatch:
