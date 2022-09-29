@@ -65,4 +65,4 @@ jobs:
       - name: Check whether passing
         working-directory: QA-AutomationEngine/output
         run: |
-          if grep -rl -e "FAILED (" -e "ERROR:" . >/dev/null; then grep -rh -e "FAIL:" -e "ERROR:" . && exit 1; else grep -rhi "OK (" .; fi
+          if grep -rl -e "FAILED (" -e "ERROR:" . >/dev/null; then grep -rh -e "FAIL:" -e "ERROR:" . && exit 1; else grep -rh "OK" .; fi
