@@ -1,0 +1,68 @@
+name: Run DSP Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        default: 'https://dsp-test.criticalzone.org/'
+        description: 'URL of dsp deployment to test'
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone QA Engine
+        uses: actions/checkout@v2
+        with:
+          repository: CUAHSI/QA-AutomationEngine
+          path: QA-AutomationEngine
+          ref: master
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        working-directory: QA-AutomationEngine
+        run: pip3 install -r requirements.txt
+
+      - name: Prepare Selenium
+        run: sudo apt-get install -y chromium-browser
+
+      - name: Create Output Dir
+        working-directory: QA-AutomationEngine
+        run: mkdir output
+
+      - name: Retrieve base64 from secrets and decode to .env file
+        working-directory: QA-AutomationEngine
+        env:
+          DSP_QA_ENGINE_ENV_BASE64: ${{ secrets.DSP_QA_ENGINE_ENV_BASE64 }}
+        run: |
+          echo $DSP_QA_ENGINE_ENV_BASE64 | base64 --decode > .env
+
+      - name: Run Tests against target = ${{ github.event.inputs.target }}
+        working-directory: QA-AutomationEngine
+        run: |
+          ./hydrotest dsp DspHydroshareTestSuite --headless --browser chrome --base ${{ github.event.inputs.target }} 2>&1 | tee -a output/hydroshare-browser-test.txt
+          ./hydrotest dsp DspExternalTestSuite --headless --browser chrome --base ${{ github.event.inputs.target }} 2>&1 | tee -a output/external-browser-test.txt
+          ./hydrotest dsp DspZenodoTestSuite --headless --browser chrome --base ${{ github.event.inputs.target }} 2>&1 | tee -a output/zenodo-browser-test.txt
+          ./hydrotest dsp DspEarthchemTestSuite --headless --browser chrome --base ${{ github.event.inputs.target }} 2>&1 | tee -a output/earthchem-browser-test.txt
+
+      - name: Archive test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: DSP-ARTIFACTS
+          path: QA-AutomationEngine/output
+
+      - name: Archive debug
+        uses: actions/upload-artifact@v3
+        with:
+          name: DSP-DEBUG
+          path: QA-AutomationEngine/debug
+
+      - name: Check whether passing
+        working-directory: QA-AutomationEngine/output
+        run: |
+          if grep -rl -e "FAILED (" -e "ERROR:" . >/dev/null; then grep -rh -e "FAIL:" -e "ERROR:" . && exit 1; else grep -rh "OK (" .; fi

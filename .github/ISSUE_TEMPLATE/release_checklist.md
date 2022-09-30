@@ -12,11 +12,12 @@ assignees: ''
    - [ ] dspfront
    - [ ] dspback 
 - [ ] Develop deployed to alpha
-- [ ] Developer tests pass on alpha
+- [ ] Developer (Unit) tests pass on alpha
+- [ ] Functional (Selennium on-demand) tests pass on alpha
 - [ ] RC branches created and deployed to beta
-- [ ] Functional tests pass on beta
+- [ ] Functional (Selennium on-demand) tests pass on beta
+- [ ] Acceptance (manual System) tests pass
 - [ ] RCs tagged as release and deployed to target
-- [ ] Acceptance tests pass
 - [ ] Merge the release tag to master
 - [ ] Merge master to develop
 - [ ] Profit
