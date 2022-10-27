@@ -20,7 +20,7 @@ def get_database():
     client = MongoClient(CONNECTION_STRING, tls=True, tlsAllowInvalidCertificates=True)
 
     # Create the database for our example (we will use the same database throughout the tutorial
-    return client['czo']['schemaorg_formatted']
+    return client['czo']['cznet']
 
 def format_fields(json_ld):
     # format datetime fields
@@ -49,6 +49,12 @@ def format_fields(json_ld):
         start_date = dateutil.parser.parse(start)
         end_date = dateutil.parser.parse(end)
         json_ld["temporalCoverage"] = {"start": start_date, "end": end_date}
+
+    if "keywords" in json_ld:
+        if json_ld["keywords"] is None:
+            json_ld["keywords"] = []
+        if isinstance(json_ld["keywords"], str):
+            json_ld["keywords"] = json_ld["keywords"].split(",")
 
     return json_ld
 
@@ -109,4 +115,3 @@ print("saving to the db")
 # save to db
 collection = get_database()
 collection.insert_many(json_lds)
-
