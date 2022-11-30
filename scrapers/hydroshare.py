@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 import json
+
+from bson import ObjectId
 from pymongo import MongoClient
 import asyncio
 import aiohttp
@@ -37,11 +39,11 @@ def format_fields(json_ld):
         spatial_coverage_geo = spatial_coverage["geo"]
         if spatial_coverage_geo["@type"] == "GeoCoordinates":
             point = Feature(geometry=Point([float(spatial_coverage_geo["longitude"]), float(spatial_coverage_geo["latitude"])]))
-            spatial_coverage["geojson"] = point
+            spatial_coverage["geojson"] = [point]
         if spatial_coverage_geo["@type"] == "GeoShape":
             south, west, north, east = spatial_coverage_geo["box"].split(" ")
             bbox = [float(north), float(south), float(east), float(west)]
-            spatial_coverage["geojson"] = bbox
+            spatial_coverage["geojson"] = [bbox]
 
     # format temporal coverage
     if "temporalCoverage" in json_ld:
@@ -114,4 +116,5 @@ json_lds = loop.run_until_complete(retrieve_jsonld(resource_ids))
 print("saving to the db")
 # save to db
 collection = get_database()
+collection.delete_many({"provider.name": "HydroShare"})
 collection.insert_many(json_lds)
