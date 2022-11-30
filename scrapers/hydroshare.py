@@ -61,29 +61,55 @@ def format_fields(json_ld):
     return json_ld
 
 
-async def fetch(session, url):
-    async with session.get(url) as response:
+async def fetch(session, res_id, clusters):
+    res_url = f"https://www.hydroshare.org/resource/{res_id}"
+    async with session.get(res_url) as response:
         if response.status != 200:
             print(f"FAILURE {url}")
-            return {"json-ld": None, "url": url, "status": response.status}
+            return {"json-ld": None, "url": res_url, "status": response.status}
         resource_data = await response.text()
         resource_soup = BeautifulSoup(resource_data, "html.parser")
         resource_json_ld = resource_soup.find("script", {"id": "schemaorg"})
         resource_json_ld = json.loads(resource_json_ld.text)
         resource_json_ld = format_fields(resource_json_ld)
-        print(f"SUCCESS {url}")
-        return {"json-ld": resource_json_ld, "url": url, "status": response.status}
+        resource_json_ld["clusters"] = clusters
+        print(f"SUCCESS {res_url}")
+        return {"json-ld": resource_json_ld, "url": res_url, "status": response.status}
 
-async def fetch_all(session, urls):
+async def fetch_all(session, ids, clusters):
     tasks = []
-    for url in urls:
-        task = asyncio.create_task(fetch(session, url))
+    for res_id in ids:
+        task = asyncio.create_task(fetch(session, res_id, clusters[res_id]))
         tasks.append(task)
     results = await asyncio.gather(*tasks)
     return results
 
 # Community 1 is CZO
 url = "https://www.hydroshare.org/community/1/"
+group_base_url = "https://www.hydroshare.org/user/"
+groups = [("5405", "CZO Boulder"),
+          ("5413", "CZO Calhoun"),
+          ("5372", "CZO Sierra"),
+          ("5407", "CZO Catalina-Jemez"),
+          ("5410", "CZO Christina"),
+          ("5406", "CZO Eel"),
+          ("5706", "CZO IML"),
+          ("5409", "CZO Luquillo"),
+          ("5404", "CZO National"),
+          ("5408", "CZO Reynolds"),
+          ("5412", "CZO Shale-Hills"),
+          ]
+
+from collections import defaultdict
+clusters_by_resource_id = defaultdict(list)
+for group in groups:
+    response = requests.get(group_base_url + group[0])
+    group_data = response.text
+    soup = BeautifulSoup(group_data, "html.parser")
+    contributions = soup.findAll("div", {"class": "contribution"})
+    for contribution in contributions:
+        resource_id = contribution.find("a")["href"][len("/resource/"):-1]
+        clusters_by_resource_id[resource_id].append(group[1])
 
 response = requests.get(url)
 community_data = response.text
@@ -104,15 +130,15 @@ for row in rows:
 
 print(f"scraped {len(resource_ids)} resource ids")
 
-async def retrieve_jsonld(ids):
+async def retrieve_jsonld(ids, clusters):
     # scrape json-ld
-    urls = [f"https://www.hydroshare.org/resource/{res_id}" for res_id in ids]
+    #urls = [f"https://www.hydroshare.org/resource/{res_id}" for res_id in ids]
     async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(verify_ssl=False)) as session:
-        results = await fetch_all(session, urls)
+        results = await fetch_all(session, ids, clusters)
     return [result["json-ld"] for result in results if result["json-ld"]]
 
 loop = asyncio.get_event_loop()
-json_lds = loop.run_until_complete(retrieve_jsonld(resource_ids))
+json_lds = loop.run_until_complete(retrieve_jsonld(resource_ids, clusters_by_resource_id))
 print("saving to the db")
 # save to db
 collection = get_database()
