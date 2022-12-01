@@ -9,5 +9,6 @@ RUN pip install -r requirements.txt
 
 COPY earthchem.py earthchem.py
 COPY hydroshare.py hydroshare.py
+COPY repo_stats.py repo_stats.py
 
 CMD ["python3"]
