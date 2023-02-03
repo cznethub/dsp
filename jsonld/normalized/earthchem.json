@@ -1,0 +1,81 @@
+{
+  "@context": "https://schema.org",
+  "repository_identifier": "512",
+  "url": "https://doi.org/10.1594/IEDA/100233",
+  "@type": "Dataset",
+  "provider": {
+    "name": "EarthChem Library"
+  },
+  "name": "Susquehanna Shale Hills Critical Zone Observatory Porewater Chemistry (2006) ",
+  "description": "Soil water chemistry collected from nested-suction lysimeters (Soil water samplers, 1900 series, SoilMoisture Equipment Corp., Santa Barbara, CA)  along a South (S) Planar (P) hillsope transect in the Susquehanna Shale Hills Critical Zone Observatory in 2006.  Lysimeter nests were located at three different positions along the hillslope elevational gradient; with the most elevated site  located at the Ridge Top (RT) followed by the Mid Slope (MS) and lowest site at the Valley Floor (VF). As the lysimeters were installed to the depth of augering refusal, first lysimeters were installed at a depth 10 cm with subsequent lysimeters installed every 10 cm.",
+  "keywords": [
+    "Susquehanna Shale Hills",
+    "Pennsylvania",
+    "Regional (Continents, Oceans)",
+    "Soil water geochemistry",
+    "major ions",
+    "DOC",
+    "trace elements",
+    "catchment hillslopes",
+    "ridge tops",
+    "valley floor"
+  ],
+  "creator": {
+    "@list": [
+      {
+        "name": "Blake  Ketchum"
+      },
+      {
+        "name": "Tim  White"
+      },
+      {
+        "name": "Pamela L. Sullivan"
+      }
+    ]
+  },
+  "funding": null,
+  "temporalCoverage": null,
+  "spatialCoverage": {
+    "geojson": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.906372,
+            40.663886
+          ]
+        },
+        "properties": {}
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.906329,
+            40.664189
+          ]
+        },
+        "properties": {}
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.906262,
+            40.664466
+          ]
+        },
+        "properties": {}
+      }
+    ]
+  },
+  "license": {
+    "text": "https://spdx.org/licenses/CC-BY-SA-4.0"
+  },
+  "datePublished": "2013-02-05T00:00:00",
+  "dateCreated": "2013-02-04T00:00:00",
+  "relations": []
+}

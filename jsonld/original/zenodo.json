@@ -1,0 +1,45 @@
+{
+  "@context": "https://schema.org/",
+  "@id": "https://doi.org/10.5281/zenodo.7597446",
+  "@type": "SoftwareSourceCode",
+  "codeRepository": "https://github.com/trixi-framework/Trixi.jl/tree/v0.5.10",
+  "creator": [
+    {
+      "@id": "https://orcid.org/0000-0002-3195-2536",
+      "@type": "Person",
+      "affiliation": "Applied and Computational Mathematics, RWTH Aachen University, Germany",
+      "name": "Schlottke-Lakemper, Michael"
+    },
+    {
+      "@id": "https://orcid.org/0000-0002-1752-1158",
+      "@type": "Person",
+      "affiliation": "Department of Mathematics and Computer Science, University of Cologne, Germany",
+      "name": "Gassner, Gregor J."
+    },
+    {
+      "@id": "https://orcid.org/0000-0002-3456-2277",
+      "@type": "Person",
+      "affiliation": "Applied Mathematics, University of Hamburg, Germany",
+      "name": "Ranocha, Hendrik"
+    },
+    {
+      "@id": "https://orcid.org/0000-0002-5902-1522",
+      "@type": "Person",
+      "affiliation": "Department of Mathematics; Computational Mathematics, Link\\u00f6ping University, Sweden",
+      "name": "Winters, Andrew R."
+    },
+    {
+      "@id": "https://orcid.org/0000-0003-2077-3636",
+      "@type": "Person",
+      "affiliation": "Department of Computational and Applied Mathematics, Rice University, US",
+      "name": "Chan, Jesse"
+    }
+  ],
+  "datePublished": "2023-02-02",
+  "description": "Adaptive high-order numerical simulations of hyperbolic PDEs in Julia",
+  "identifier": "https://doi.org/10.5281/zenodo.7597446",
+  "license": "https://opensource.org/licenses/MIT",
+  "name": "Trixi.jl",
+  "url": "https://zenodo.org/record/7597446",
+  "version": "v0.5.10"
+}

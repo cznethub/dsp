@@ -1,0 +1,120 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "datacite": "http://purl.org/spar/datacite/"
+  },
+  "@id": "https://doi.org/10.1594/IEDA/100233",
+  "@type": "Dataset",
+  "name": "Susquehanna Shale Hills Critical Zone Observatory Porewater Chemistry (2006) ",
+  "sameAs": "https://ecl.earthchem.org/view.php?id=512",
+  "isAccessibleForFree": true,
+  "citation": [
+    "https://doi.org/10.2136/vzj2010.0133"
+  ],
+  "author": {
+    "@list": [
+      {
+        "@type": "Role",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Susan L. Brantley",
+            "givenName": "Susan",
+            "familyName": "Brantley"
+          }
+        ],
+        "roleName": "Lead Author"
+      },
+      {
+        "@type": "Role",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Blake  Ketchum",
+            "givenName": "Blake",
+            "familyName": "Ketchum"
+          },
+          {
+            "@type": "Person",
+            "name": "Tim  White",
+            "givenName": "Tim",
+            "familyName": "White"
+          },
+          {
+            "@type": "Person",
+            "name": "Pamela L. Sullivan",
+            "givenName": "Pamela",
+            "familyName": "Sullivan"
+          }
+        ],
+        "roleName": "Coauthor"
+      }
+    ]
+  },
+  "description": "Soil water chemistry collected from nested-suction lysimeters (Soil water samplers, 1900 series, SoilMoisture Equipment Corp., Santa Barbara, CA)  along a South (S) Planar (P) hillsope transect in the Susquehanna Shale Hills Critical Zone Observatory in 2006.  Lysimeter nests were located at three different positions along the hillslope elevational gradient; with the most elevated site  located at the Ridge Top (RT) followed by the Mid Slope (MS) and lowest site at the Valley Floor (VF). As the lysimeters were installed to the depth of augering refusal, first lysimeters were installed at a depth 10 cm with subsequent lysimeters installed every 10\\u00a0cm.",
+  "distribution": {
+    "datePublished": "2013-02-05 00:00:00",
+    "contentUrl": "https://ecl.earthchem.org/view.php?id=512",
+    "@type": "DataDownload",
+    "encodingFormat": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  },
+  "license": "https://spdx.org/licenses/CC-BY-SA-4.0",
+  "dateCreated": "2013-02-04",
+  "inLanguage": "English",
+  "keywords": [
+    "Susquehanna Shale Hills",
+    "Pennsylvania",
+    "Regional (Continents, Oceans)",
+    "Soil water geochemistry",
+    "major ions",
+    "DOC",
+    "trace elements",
+    "catchment hillslopes",
+    "ridge tops",
+    "valley floor"
+  ],
+  "publisher": {
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "name": "Information Desk",
+      "contactType": "Customer Service",
+      "email": "info@earthchem.org",
+      "url": "https://www.earthchem.org/contact/"
+    },
+    "@type": "Organization",
+    "name": "EarthChem Library",
+    "@id": "https://www.earthchem.org",
+    "url": "https://www.earthchem.org/library"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "EarthChem Library"
+  },
+  "spatialCoverage": {
+    "@type": "Place",
+    "geo": [
+      {
+        "@type": "GeoCoordinates",
+        "latitude": "40.6638863",
+        "longitude": "-77.9063721"
+      },
+      {
+        "@type": "GeoCoordinates",
+        "latitude": "40.6641887",
+        "longitude": "-77.9063285"
+      },
+      {
+        "@type": "GeoCoordinates",
+        "latitude": "40.6644664",
+        "longitude": "-77.9062619"
+      }
+    ]
+  },
+  "url": "https://doi.org/10.1594/IEDA/100233",
+  "funder": {
+    "@type": "MonetaryGrant",
+    "fundedItem": {
+      "@id": "https://doi.org/10.1594/IEDA/100233"
+    }
+  }
+}

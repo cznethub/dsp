@@ -1,0 +1,219 @@
+{
+  "title": "JSONLD",
+  "description": "Document Mapping class.\n\nFields:\n\n- `id` - MongoDB document ObjectID \"_id\" field.\nMapped to the PydanticObjectId class\n\nInherited from:\n\n- Pydantic BaseModel\n- [UpdateMethods](https://roman-right.github.io/beanie/api/interfaces/#aggregatemethods)",
+  "type": "object",
+  "properties": {
+    "_id": {
+      "title": " Id",
+      "type": "string",
+      "examples": [
+        "5eb7cf5a86d9755df3a6c593",
+        "5eb7cfb05e32e07750a1756a"
+      ]
+    },
+    "revision_id": {
+      "title": "Revision Id",
+      "hidden": true,
+      "type": "string",
+      "format": "uuid"
+    },
+    "@context": {
+      "title": "@Context",
+      "default": "https://schema.org",
+      "minLength": 1,
+      "maxLength": 2083,
+      "format": "uri",
+      "type": "string"
+    },
+    "repository_identifier": {
+      "title": "Repository Identifier",
+      "type": "string"
+    },
+    "url": {
+      "title": "Url",
+      "minLength": 1,
+      "maxLength": 2083,
+      "format": "uri",
+      "type": "string"
+    },
+    "@type": {
+      "title": "@Type",
+      "default": "Dataset",
+      "type": "string"
+    },
+    "provider": {
+      "$ref": "#/definitions/Provider"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "keywords": {
+      "title": "Keywords",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "creator": {
+      "$ref": "#/definitions/CreatorList"
+    },
+    "funding": {
+      "title": "Funding",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Funding"
+      }
+    },
+    "temporalCoverage": {
+      "$ref": "#/definitions/TemporalCoverage"
+    },
+    "spatialCoverage": {
+      "$ref": "#/definitions/SpatialCoverage"
+    },
+    "license": {
+      "$ref": "#/definitions/License"
+    },
+    "datePublished": {
+      "title": "Datepublished",
+      "type": "string",
+      "format": "date-time"
+    },
+    "dateCreated": {
+      "title": "Datecreated",
+      "type": "string",
+      "format": "date-time"
+    },
+    "relations": {
+      "title": "Relations",
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "repository_identifier",
+    "url",
+    "provider"
+  ],
+  "definitions": {
+    "Provider": {
+      "title": "Provider",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Creator": {
+      "title": "Creator",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CreatorList": {
+      "title": "CreatorList",
+      "type": "object",
+      "properties": {
+        "@list": {
+          "title": "@List",
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Creator"
+          }
+        }
+      }
+    },
+    "Funder": {
+      "title": "Funder",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      }
+    },
+    "Funding": {
+      "title": "Funding",
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "number": {
+          "title": "Number",
+          "type": "string"
+        },
+        "funder": {
+          "title": "Funder",
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Funder"
+          }
+        }
+      }
+    },
+    "TemporalCoverage": {
+      "title": "TemporalCoverage",
+      "type": "object",
+      "properties": {
+        "start": {
+          "title": "Start",
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "title": "End",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "SpatialCoverage": {
+      "title": "SpatialCoverage",
+      "type": "object",
+      "properties": {
+        "geojson": {
+          "title": "Geojson",
+          "type": "array",
+          "items": {}
+        }
+      },
+      "required": [
+        "geojson"
+      ]
+    },
+    "License": {
+      "title": "License",
+      "type": "object",
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

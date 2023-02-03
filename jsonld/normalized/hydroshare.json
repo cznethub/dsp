@@ -1,0 +1,100 @@
+{
+  "@context": "https://schema.org",
+  "repository_identifier": "96310f82dd5247ba8201955750093923",
+  "url": "https://www.hydroshare.org/resource/96310f82dd5247ba8201955750093923",
+  "@type": "Dataset",
+  "provider": {
+    "name": "HydroShare"
+  },
+  "name": "Logan River Observatory: Golf Course Climate Site (LR_GC_C) Raw Data",
+  "description": "This dataset contains raw data for all of the variables measured for the climate site near the Logan River Golf Course (LR_GC_C). Each file contains a calendar year of data. The file for the current year is updated on a daily basis. The data values were collected by a variety of sensors at 15 minute intervals. The file header contains detailed metadata for the site and the variable and method of each column. This site is currently operated as part of the Logan River Observatory. Prior to 2018 this site was operated as part of the iUTAH GAMUT Network.",
+  "keywords": [
+    "climate",
+    "GAMUT",
+    "soil",
+    "iUTAH",
+    "snow",
+    "raw data",
+    "time series",
+    "LRO",
+    "Logan River",
+    "precipitation",
+    "Logan River Observatory"
+  ],
+  "creator": {
+    "@list": [
+      {
+        "name": "Logan River Observatory"
+      }
+    ]
+  },
+  "funding": [
+    {
+      "name": "iUTAH-innovative Urban Transitions and Aridregion  Hydro-sustainability",
+      "number": null,
+      "funder": [
+        {
+          "name": "National Science Foundation"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "number": null,
+      "funder": [
+        {
+          "name": "Cache Water District"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "number": null,
+      "funder": [
+        {
+          "name": "State of Utah/Division of Water Resources"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "number": null,
+      "funder": [
+        {
+          "name": "Utah State University"
+        }
+      ]
+    },
+    {
+      "name": "",
+      "number": null,
+      "funder": [
+        {
+          "name": "Logan City"
+        }
+      ]
+    }
+  ],
+  "temporalCoverage": null,
+  "spatialCoverage": {
+    "geojson": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -111.8543,
+            41.7056
+          ]
+        },
+        "properties": {}
+      }
+    ]
+  },
+  "license": {
+    "text": "This resource is shared under the Creative Commons Attribution CC BY."
+  },
+  "datePublished": null,
+  "dateCreated": "2016-07-22T18:38:00.727929+00:00",
+  "relations": []
+}

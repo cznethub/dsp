@@ -1,0 +1,40 @@
+{
+  "@context": "https://schema.org",
+  "repository_identifier": "7597446",
+  "url": "https://zenodo.org/record/7597446",
+  "@type": "SoftwareSourceCode",
+  "provider": {
+    "name": "Zenodo"
+  },
+  "name": "Trixi.jl",
+  "description": "Adaptive high-order numerical simulations of hyperbolic PDEs in Julia",
+  "keywords": null,
+  "creator": {
+    "@list": [
+      {
+        "name": "Schlottke-Lakemper, Michael"
+      },
+      {
+        "name": "Gassner, Gregor J."
+      },
+      {
+        "name": "Ranocha, Hendrik"
+      },
+      {
+        "name": "Winters, Andrew R."
+      },
+      {
+        "name": "Chan, Jesse"
+      }
+    ]
+  },
+  "funding": null,
+  "temporalCoverage": null,
+  "spatialCoverage": null,
+  "license": {
+    "text": "https://opensource.org/licenses/MIT"
+  },
+  "datePublished": "2023-02-02T00:00:00",
+  "dateCreated": null,
+  "relations": []
+}
