@@ -7,6 +7,7 @@ import aiohttp
 import dateutil.parser
 from geojson import Point, Feature
 import re
+import os
 
 '''
 Update the USER/PASSWORD in the CONNECTION_STRING before running!
@@ -15,13 +16,13 @@ Update the USER/PASSWORD in the CONNECTION_STRING before running!
 def get_database():
 
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
-    CONNECTION_STRING = "mongodb+srv://<USER>:<PASSWORD>@cluster0.iouzjvv.mongodb.net/?retryWrites=true&w=majority"
+    CONNECTION_STRING = f"{os.environ['MONGO_PROTOCOL']}://{os.environ['MONGO_USERNAME']}:{os.environ['MONGO_PASSWORD']}@{os.environ['MONGO_HOST']}/?retryWrites=true&w=majority"
 
     # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
-    client = MongoClient(CONNECTION_STRING)
+    client = MongoClient(CONNECTION_STRING, tls=True, tlsAllowInvalidCertificates=True)
 
     # Create the database for our example (we will use the same database throughout the tutorial
-    return client['czo']['cznet']
+    return client[os.environ['MONGO_DATABASE']][os.environ['MONGO_COLLECTION']]
 
 def format_fields(json_ld):
     # format datetime fields
@@ -60,6 +61,7 @@ def format_fields(json_ld):
         if isinstance(json_ld["keywords"], str):
             json_ld["keywords"] = re.split(r',(?=[^/s ])', json_ld["keywords"])
 
+    json_ld["legacy"] = True
     return json_ld
 
 async def fetch(session, url):
@@ -133,7 +135,6 @@ earthchem_urls = [
     'https://doi.org/10.1594/IEDA/100468',
     'https://doi.org/10.1594/IEDA/100469',
     'https://doi.org/10.1594/IEDA/100471',
-    'https://doi.org/10.1594/IEDA/100473',
     'https://doi.org/10.1594/IEDA/100473',
     'https://doi.org/10.1594/IEDA/100474',
     'https://doi.org/10.1594/IEDA/100475',
