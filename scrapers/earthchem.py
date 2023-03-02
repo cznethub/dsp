@@ -1,3 +1,5 @@
+import html
+
 from bs4 import BeautifulSoup
 import requests
 import json
@@ -72,7 +74,7 @@ async def fetch(session, url):
         resource_data = await response.text()
         resource_soup = BeautifulSoup(resource_data, "html.parser")
         resource_json_ld = resource_soup.find("script", {"type": "application/ld+json"})
-        resource_json_ld = json.loads(resource_json_ld.text)
+        resource_json_ld = json.loads(html.unescape(resource_json_ld.text))
         resource_json_ld = format_fields(resource_json_ld)
         print(f"SUCCESS {url}")
         return {"json-ld": resource_json_ld, "url": url, "status": response.status}

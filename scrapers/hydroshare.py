@@ -2,13 +2,13 @@ from bs4 import BeautifulSoup
 import requests
 import json
 
-from bson import ObjectId
 from pymongo import MongoClient
 import asyncio
 import aiohttp
 import dateutil.parser
 from geojson import Point, Feature
 import os
+import html
 
 '''
 Update the USER/PASSWORD in the CONNECTION_STRING before running!
@@ -73,7 +73,7 @@ async def fetch(session, res_id, clusters):
         resource_data = await response.text()
         resource_soup = BeautifulSoup(resource_data, "html.parser")
         resource_json_ld = resource_soup.find("script", {"id": "schemaorg"})
-        resource_json_ld = json.loads(resource_json_ld.text)
+        resource_json_ld = json.loads(html.unescape(resource_json_ld.text))
         resource_json_ld = format_fields(resource_json_ld)
         resource_json_ld["clusters"] = clusters
         print(f"SUCCESS {res_url}")
