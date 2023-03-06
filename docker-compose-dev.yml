@@ -22,21 +22,17 @@ services:
       context: ./dspback
       dockerfile: Dockerfile
     depends_on:
-      - database
+      - mongodb
     ports:
       - 5002:5002
     restart: on-failure
 
-  database:
-    image: postgres:13.1
-    container_name: database
+  mongodb:
+    image: mongo:5.0
     ports:
-      - 5432:5432
-
-    environment:
-      POSTGRES_USER: "${DATABASE_USERNAME}"
-      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
-      POSTGRES_DB: "${DATABASE_NAME}"
-
+      - '27017:27017'
     volumes:
-      - ./db-data/:/var/lib/postgresql/data/
+      - ./mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=AzureDiamond
+      - MONGO_INITDB_ROOT_PASSWORD=hunter2
