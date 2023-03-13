@@ -76,6 +76,7 @@ async def fetch(session, res_id, clusters):
         resource_json_ld = json.loads(html.unescape(resource_json_ld.text))
         resource_json_ld = format_fields(resource_json_ld)
         resource_json_ld["clusters"] = clusters
+        resource_json_ld["repository_identifier"] = res_id
         print(f"SUCCESS {res_url}")
         return {"json-ld": resource_json_ld, "url": res_url, "status": response.status}
 
@@ -145,5 +146,5 @@ json_lds = loop.run_until_complete(retrieve_jsonld(resource_ids, clusters_by_res
 print("saving to the db")
 # save to db
 collection = get_database()
-collection.delete_many({"provider.name": "HydroShare"})
+collection.delete_many({"provider.name": "HydroShare", "legacy": True})
 collection.insert_many(json_lds)

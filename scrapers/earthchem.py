@@ -74,8 +74,13 @@ async def fetch(session, url):
         resource_data = await response.text()
         resource_soup = BeautifulSoup(resource_data, "html.parser")
         resource_json_ld = resource_soup.find("script", {"type": "application/ld+json"})
-        resource_json_ld = json.loads(html.unescape(resource_json_ld.text))
+        try:
+            resource_json_ld = json.loads(html.unescape(resource_json_ld.text))
+        except Exception as e:
+            print(f"Failed {url}")
+            return {"json-ld": None, "url": url, "status": response.status}
         resource_json_ld = format_fields(resource_json_ld)
+        resource_json_ld["repository_identifier"] = resource_json_ld["sameAs"].split("id=")[1]
         print(f"SUCCESS {url}")
         return {"json-ld": resource_json_ld, "url": url, "status": response.status}
 
@@ -167,5 +172,5 @@ json_lds = loop.run_until_complete(retrieve_jsonld(earthchem_urls))
 print("saving to the db")
 # save to db
 collection = get_database()
-collection.delete_many({"provider.name": "EarthChem Library"})
+collection.delete_many({"provider.name": "EarthChem Library", "legacy": True})
 collection.insert_many(json_lds)
