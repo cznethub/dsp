@@ -7,7 +7,7 @@ from pymongo import MongoClient
 import asyncio
 import aiohttp
 import dateutil.parser
-from geojson import Point, Feature
+from geojson import Point, Feature, Polygon
 import re
 import os
 
@@ -47,7 +47,7 @@ def format_fields(json_ld):
                 spatial_coverage["geojson"].append(point)
             if sc["@type"] == "GeoShape":
                 south, west, north, east = sc["box"].split(" ")
-                bbox = [float(north), float(south), float(east), float(west)]
+                bbox = Feature(geometry=Polygon([float(north), float(south), float(east), float(west)]))
                 spatial_coverage["geojson"].append(bbox)
 
     # format temporal coverage
