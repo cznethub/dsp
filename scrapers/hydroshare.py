@@ -10,6 +10,8 @@ from geojson import Point, Feature
 import os
 import html
 
+from discovery import JSONLD
+
 '''
 Update the USER/PASSWORD in the CONNECTION_STRING before running!
 '''
@@ -77,8 +79,9 @@ async def fetch(session, res_id, clusters):
         resource_json_ld = format_fields(resource_json_ld)
         resource_json_ld["clusters"] = clusters
         resource_json_ld["repository_identifier"] = res_id
+        model = JSONLD(**resource_json_ld)
         print(f"SUCCESS {res_url}")
-        return {"json-ld": resource_json_ld, "url": res_url, "status": response.status}
+        return {"json-ld": model.dict(by_alias=True, exclude_none=True), "url": res_url, "status": response.status}
 
 async def fetch_all(session, ids, clusters):
     tasks = []

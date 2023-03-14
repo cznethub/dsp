@@ -1,7 +1,7 @@
 import html
 
 from bs4 import BeautifulSoup
-import requests
+from discovery import JSONLD
 import json
 from pymongo import MongoClient
 import asyncio
@@ -81,8 +81,12 @@ async def fetch(session, url):
             return {"json-ld": None, "url": url, "status": response.status}
         resource_json_ld = format_fields(resource_json_ld)
         resource_json_ld["repository_identifier"] = resource_json_ld["sameAs"].split("id=")[1]
+        resource_json_ld["@context"] = resource_json_ld["@context"]["@vocab"]
+        resource_json_ld["license"] = {"text": resource_json_ld["license"]}
+        print(f"validating {url}")
+        jsonld = JSONLD(**resource_json_ld)
         print(f"SUCCESS {url}")
-        return {"json-ld": resource_json_ld, "url": url, "status": response.status}
+        return {"json-ld": jsonld.dict(by_alias=True, exclude_none=True), "url": url, "status": response.status}
 
 async def fetch_all(session, urls):
     tasks = []
