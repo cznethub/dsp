@@ -162,7 +162,10 @@ earthchem_urls = [
     'https://doi.org/10.1594/IEDA/100240',
     'https://doi.org/10.1594/IEDA/100241',
     'https://doi.org/10.1594/IEDA/100242',
-    'https://doi.org/10.1594/IEDA/100243'
+    'https://doi.org/10.1594/IEDA/100243',
+    'https://doi.org/10.26022/IEDA/112721',
+    'https://doi.org/10.26022/IEDA/112309',
+    'https://doi.org/10.26022/IEDA/112285'
 ]
 
 async def retrieve_jsonld(urls):
