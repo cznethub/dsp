@@ -18,9 +18,11 @@ services:
     container_name: dspback
     volumes:
       - ./.env:/dspback/.env
+      - ./dspback:/dspback
+    entrypoint: bash dev-entrypoint.sh
     build:
       context: ./dspback
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-dev
     depends_on:
       - mongodb
     ports:
