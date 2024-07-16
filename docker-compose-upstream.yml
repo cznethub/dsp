@@ -12,6 +12,12 @@ services:
       - dspback
     ports:
       - 5001:5001
+    environment:
+      - VITE_APP_HEAP_ANALYTICS_APP_ID=${VITE_APP_HEAP_ANALYTICS_APP_ID}
+      - VITE_APP_GOOGLE_MAPS_API_KEY=${VITE_APP_GOOGLE_MAPS_API_KEY}
+      - VITE_APP_DISCOVERY_PORTAL_URL=${VITE_APP_DISCOVERY_PORTAL_URL}
+      - VITE_APP_API_URL=${VITE_APP_API_URL}
+      - VITE_APP_URL=${VITE_APP_URL}
     restart: unless-stopped
 
   dspback:
