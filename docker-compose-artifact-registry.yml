@@ -17,7 +17,7 @@ services:
         restart: unless-stopped
 
     dspback:
-        image: us-east1-docker.pkg.dev/cznet-393818/cznethub/dspfront:${AR_TAG_DSPBACK}
+        image: us-east1-docker.pkg.dev/cznet-393818/cznethub/dspback:${AR_TAG_DSPBACK}
         container_name: dspback
         ports:
             - 5002:5002
