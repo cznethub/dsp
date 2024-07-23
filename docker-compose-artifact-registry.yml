@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+    dspfront:
+        image: us-east1-docker.pkg.dev/cznet-393818/cznethub/dspfront:${AR_TAG_DSPFRONT}
+        container_name: dspfront
+        depends_on:
+            - dspback
+        ports:
+            - 5001:5001
+        environment:
+            - VITE_APP_HEAP_ANALYTICS_APP_ID=${VITE_APP_HEAP_ANALYTICS_APP_ID}
+            - VITE_APP_GOOGLE_MAPS_API_KEY=${VITE_APP_GOOGLE_MAPS_API_KEY}
+            - VITE_APP_DISCOVERY_PORTAL_URL=${VITE_APP_DISCOVERY_PORTAL_URL}
+            - VITE_APP_API_URL=${VITE_APP_API_URL}
+            - VITE_APP_URL=${VITE_APP_URL}
+        restart: unless-stopped
+
+    dspback:
+        image: us-east1-docker.pkg.dev/cznet-393818/cznethub/dspfront:${AR_TAG_DSPBACK}
+        container_name: dspback
+        ports:
+            - 5002:5002
+        restart: unless-stopped
