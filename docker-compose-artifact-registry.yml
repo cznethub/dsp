@@ -1,6 +1,6 @@
 services:
     dspfront:
-        image: dspfront:${DSPFRONT_AR_TAG}
+        image: dspfront:${DSPFRONT_TAG}
         container_name: dspfront
         volumes:
             - ./dspfront/.env:/dspfront/.env
@@ -17,7 +17,7 @@ services:
         restart: unless-stopped
 
     dspback:
-        image: dspback:${DSPBACK_AR_TAG}
+        image: dspback:${DSPBACK_TAG}
         container_name: dspback
         volumes:
             - ./dspback/.env:/dspback/.env
